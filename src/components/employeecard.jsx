@@ -13,11 +13,11 @@ import Stack from '@mui/material/Stack';
 
 export default function MediaCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, paddingLeft: 2, paddingRight: 2 }}>
       <Box  sx={{ textAlign: "center"}}>
       <CardMedia
         sx={{ height: 200, width: 200, backgroundSize: "contain", margin: "auto", paddingTop: 2 }}
-        image="profile4.png"
+        image="/employee-dashboard-react-app-rohit/profile4.png"
         title="profile image"
       />
       </Box>
