@@ -11,37 +11,45 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
 
-export default function MediaCard() {
+export default function MediaCard({ data }) {
+  /* console.log(data); */
   return (
-    <Card sx={{ maxWidth: 345, paddingLeft: 2, paddingRight: 2 }}>
-      <Box  sx={{ textAlign: "center"}}>
-      <CardMedia
-        sx={{ height: 200, width: 200, backgroundSize: "contain", margin: "auto", paddingTop: 2 }}
-        image="/employee-dashboard-react-app-rohit/profile4.png"
-        title="profile image"
-      />
-      </Box>
-      <CardContent>
-        
-        <Typography gutterBottom variant="h5" component="div">
-        <EmojiNatureIcon />John Wick
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Department: UI/UX Designer
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Position: UI Designer
-        </Typography>
-        <Stack direction="row" spacing={1} sx= {{marginTop: 2, justifyContent: "center"}}>
-      <Chip label="Figma" />
-      <Chip label="Unity" />
-      <Chip label="Sketch" />
-    </Stack>
-    <Stack direction="row" spacing={1}  sx= {{marginTop: 1, justifyContent: "center"}}>
-      <Chip label="Active" variant="outlined" />
-      <Chip label="20 hours" variant="outlined" />
-    </Stack>
-      </CardContent>
-    </Card>
+    <>
+      {data.map((item, index) => (
+
+
+          <Card sx={{ maxWidth: 345, paddingLeft: 2, paddingRight: 2, marginTop: 5 }}>
+            <Box  sx={{ textAlign: "center"}}>
+            <CardMedia
+              sx={{ height: 200, width: 200, backgroundSize: "contain", margin: "auto", paddingTop: 2 }}
+              image={`/employee-dashboard-react-app-rohit/${item.image}`}
+              title="profile image"
+            />
+            </Box>
+            <CardContent>
+              
+              <Typography gutterBottom variant="h5" component="div">
+              <EmojiNatureIcon />
+              {item.firstName} {item.lastName}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Department: UI/UX Designer
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Position: UI Designer
+              </Typography>
+              <Stack direction="row" flexWrap="wrap" spacing={1} sx= {{marginTop: 2, justifyContent: "center"}}>
+                {item.skills.map((skill, skillIndex) => (
+                  <Chip sx={{ marginTop: 2 }} key={skillIndex} label={skill} />
+                ))}
+          </Stack>
+          <Stack direction="row" spacing={1}  sx= {{marginTop: 1, justifyContent: "center"}}>
+            <Chip label={item.onLeave? "Inactive" : "Active"} variant="outlined" />
+            <Chip label={`Hours: ${item.hoursLoggedThisWeek}`} variant="outlined" />
+          </Stack>
+            </CardContent>
+          </Card>
+        ))}
+      </>
   );
 }
